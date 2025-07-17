@@ -18,3 +18,9 @@ Thumbs.db
 
 # Logs and misc
 *.log
+
+# Ignore everything in output folder...
+app/output/*
+
+# ...except the .gitkeep file
+!app/output/.gitkeep
