@@ -127,7 +127,7 @@ GitHub: [https://github.com/salusha](https://github.com/salusha)
 Snehal Taori — Participant, Adobe Hackathon 2025  
 GitHub: [https://github.com/snehaltaori](https://github.com/snehaltaori)
 
-DeepanshiiVerma — Participant, Adobe Hackathon 2025  
+Deepanshi Verma — Participant, Adobe Hackathon 2025  
 GitHub: [https://github.com/DeepanshiiVerma](https://github.com/DeepanshiiVerma)
 
 
