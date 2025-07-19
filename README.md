@@ -17,7 +17,7 @@
 ```bash
 docker build --platform linux/amd64 -t pdfextractor:round1a .
 docker run --rm -v $(pwd)/input:/app/input -v $(pwd)/output:/app/output --network none pdfextractor:round1a -->
-# 🚀 Adobe Hackathon 2025 - Round 1A: PDF Outline Extractor
+# 🚀 Adobe Hackathon 2025 - Round 1A: 
 
 ## ✅ Approach
 
