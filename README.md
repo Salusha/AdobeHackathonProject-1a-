@@ -124,6 +124,13 @@ Each PDF file will produce a corresponding `.json` file in `app/output/` with th
 Salusha — Participant, Adobe Hackathon 2025  
 GitHub: [https://github.com/salusha](https://github.com/salusha)
 
+Snehal Taori — Participant, Adobe Hackathon 2025  
+GitHub: [https://github.com/snehaltaori](https://github.com/snehaltaori)
+
+DeepanshiiVerma — Participant, Adobe Hackathon 2025  
+GitHub: [https://github.com/DeepanshiiVerma](https://github.com/DeepanshiiVerma)
+
+
 ---
 
 ## 📝 Notes
