@@ -112,11 +112,12 @@ docker run --rm -v "$(pwd)/app/input:/app/input" -v "$(pwd)/app/output:/app/outp
 Declared in `requirements.txt`:
 
 ```
-PyMuPDF==1.23.7
-sentence-transformers==2.2.2
-scikit-learn==1.2.2
-pandas==1.5.3
+torch==2.1.2
+sentence-transformers==2.6.1
 numpy==1.24.4
+pandas==1.5.3
+scikit-learn==1.2.2
+PyMuPDF==1.23.7
 
 ```
 
