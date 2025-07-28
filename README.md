@@ -80,7 +80,6 @@ Each PDF generates a corresponding JSON with the following structure:
 
 ```bash
 docker build --platform=linux/amd64 -t pdf-outline-extractor .
-docker build --platform=linux/amd64 -t pdfextractor:round1a .
 ```
 
 ### ▶️ Step 2: Run the Container
@@ -89,20 +88,16 @@ docker build --platform=linux/amd64 -t pdfextractor:round1a .
 
 ```bash
 docker run --rm \
-  -v $(pwd)/app/input:/app/input \
-  -v $(pwd)/app/output:/app/output \
+  -v "$(pwd)/app/input:/app/input" \
+  -v "$(pwd)/app/output:/app/output" \
   --network none \
-  pdfextractor:round1a
+  pdf-outline-extractor
 ```
 
 #### On Windows (PowerShell):
-
-docker run --rm `
-  -v ${PWD}/app/input:/app/input `
-  -v ${PWD}/app/output:/app/output `
-  --network none `
-  pdf-outline-extractor
-
+```bash
+docker run --rm -v "$(pwd)/app/input:/app/input" -v "$(pwd)/app/output:/app/output" --network none pdf-outline-extractor
+```
 
 > ℹ️ The container runs **completely offline**. Ensure your `input/` folder contains PDFs before running.
 
@@ -114,9 +109,11 @@ Declared in `requirements.txt`:
 
 ```
 PyMuPDF==1.23.7
+sentence-transformers==2.2.2
+scikit-learn==1.2.2
 pandas==1.5.3
 numpy==1.24.4
-scikit-learn==1.2.2
+
 ```
 
 Install locally using:
