@@ -34,15 +34,19 @@ The solution must:
 ```
 AdobeHackathonProject/
 ├── app/
-│   ├── input/             # Input PDFs go here
-│   └── output/            # Output JSONs will be saved here
+│   ├── input/                  # Input PDFs go here
+│   └── output/                 # Output JSONs will be saved here
 ├── src/
-│   └── extractor.py       # Core logic for PDF parsing and heading extraction
-├── main.py                # Entry point for PDF batch processing
-├── requirements.txt       # Required Python packages
-├── Dockerfile             # For building offline-compatible image
-├── .dockerignore          # Prevents unnecessary file copies into Docker image
-└── README.md              # This file
+│   ├── extract_structure.py    # Core logic for PDF parsing and heading extraction
+│   ├── heading_logic.py        # Heading detection, TOC alignment, etc.
+│   └── utils.py                # Utility functions (e.g. cleaning, file ops, logging)
+├── main.py                     # Entry point for PDF batch processing
+├── requirements.txt            # Required Python packages
+├── Dockerfile                  # For building offline-compatible image
+├── .dockerignore               # Prevents unnecessary file copies into Docker image
+├── .gitignore                  # Ignore rules for Git
+└── README.md                   # This file
+
 ```
 
 ---
@@ -160,11 +164,16 @@ Each `.json` file contains structured heading outlines.
 
 ---
 
-## 👩‍💻 Authors
+## 👩‍💻 Author
 
-- **Salusha** — [GitHub](https://github.com/salusha)  
-- **Snehal Taori** — [GitHub](https://github.com/snehaltaori)  
-- **Deepanshi Verma** — [GitHub](https://github.com/DeepanshiiVerma)
+Salusha — Participant, Adobe Hackathon 2025  
+GitHub: [https://github.com/salusha](https://github.com/salusha)
+
+Snehal Taori — Participant, Adobe Hackathon 2025  
+GitHub: [https://github.com/snehaltaori](https://github.com/snehaltaori)
+
+Deepanshi Verma — Participant, Adobe Hackathon 2025  
+GitHub: [https://github.com/DeepanshiiVerma](https://github.com/DeepanshiiVerma)
 
 ---
 
