@@ -1,79 +1,62 @@
-# 🚀 Adobe Hackathon 2025 - Round 1A: 
-
-## ✅ Approach
-
-- Used **PyMuPDF** (`fitz`) for fast and accurate PDF parsing.
-- Extracted **text spans along with font sizes and positions**.
-- Computed a **font size frequency histogram** to determine heading styles:
-  - Top 3 most frequent large font sizes → mapped to **H1**, **H2**, and **H3**.
-- The **document title** is inferred from the **largest text span** on the first 1–2 pages.
-- Outputs a structured JSON with:
-  - `"title"`: Title of the document
-  - `"outline"`: List of extracted headings with their hierarchy (H1, H2, H3)
+# 🧠 Adobe Hackathon 2025 - Round 1A
 
 ---
 
-## 🛠️ Dependencies
+## 📝 Problem Statement
 
-- Python 3.10+
-- [PyMuPDF](https://pymupdf.readthedocs.io/en/latest/) (`fitz`) — version 1.23.7
+Given a collection of unstructured PDF documents, extract a **structured outline** in the form of:
+- **Document Title**
+- **Headings** categorized as H1, H2, H3
 
-Install the dependencies using:
-
-```bash
-pip install -r requirements.txt
-```
+The solution must:
+- Run **completely offline** (no internet access)
+- Be Dockerized
+- Handle multiple PDF files
+- Output structured **JSON files** for each PDF
 
 ---
 
-## 📂 Directory Structure
+## 💡 Solution Overview
+
+- Uses **PyMuPDF (`fitz`)** to parse PDFs offline.
+- Extracts **text spans with font sizes and positions**.
+- Detects heading levels using **font-size clustering**:
+  - Highest font sizes are mapped to **H1**, **H2**, **H3**.
+- Infers **document title** from the largest text element found on the first 1–2 pages.
+- Outputs structured JSON files with:
+  - `"title"`: Document title
+  - `"outline"`: List of headings with `"heading"` and `"level"`
+
+---
+
+## 📁 Folder Structure
 
 ```
 AdobeHackathonProject/
 ├── app/
-│   ├── input/        # Input PDFs (mounted into Docker)
-│   ├── output/       # Output JSONs (mounted into Docker)
+│   ├── input/             # Input PDFs go here
+│   └── output/            # Output JSONs will be saved here
 ├── src/
-│   └── extractor.py  # Core logic for heading/title extraction
-├── main.py           # Entry point to run outline extraction
-├── requirements.txt  # Required Python packages
-├── Dockerfile        # Offline Docker image build
-└── README.md         # Project documentation
+│   └── extractor.py       # Core logic for PDF parsing and heading extraction
+├── main.py                # Entry point for PDF batch processing
+├── requirements.txt       # Required Python packages
+├── Dockerfile             # For building offline-compatible image
+├── .dockerignore          # Prevents unnecessary file copies into Docker image
+└── README.md              # This file
 ```
 
 ---
 
-## 🐳 Build & Run Instructions (Offline Docker)
+## 📥 Input JSON Format
 
-### 🔨 Step 1: Build the Docker Image
-
-```bash
-docker build --platform linux/amd64 -t pdfextractor:round1a .
-```
-
-### 🚀 Step 2: Run the Container
-
-```bash
-docker run --rm \
-  -v $(pwd)/app/input:/app/input \
-  -v $(pwd)/app/output:/app/output \
-  --network none \
-  pdfextractor:round1a
-```
-
-> 📌 This runs completely **offline** (as per Round 1A requirements).
+**No input JSON needed.**  
+You only need to drop PDF files into the `app/input/` folder.
 
 ---
 
-## 📥 Input Format
+## 📤 Output JSON Format
 
-Place all your `.pdf` files inside the `app/input/` directory.
-
----
-
-## 📤 Output Format
-
-Each PDF file will produce a corresponding `.json` file in `app/output/` with the following structure:
+Each PDF generates a corresponding JSON with the following structure:
 
 ```json
 {
@@ -81,6 +64,7 @@ Each PDF file will produce a corresponding `.json` file in `app/output/` with th
   "outline": [
     { "heading": "1. Introduction", "level": "H1" },
     { "heading": "1.1 What is AI?", "level": "H2" },
+    { "heading": "1.2 History", "level": "H2" },
     { "heading": "2. Applications", "level": "H1" },
     { "heading": "2.1 Healthcare", "level": "H2" },
     { "heading": "2.1.1 Diagnostics", "level": "H3" }
@@ -90,26 +74,98 @@ Each PDF file will produce a corresponding `.json` file in `app/output/` with th
 
 ---
 
-## ✅ Features
+## 🐳 Running the Project with Docker
 
-- ✅ Accurate outline extraction using font size logic
-- ✅ Handles multiple PDFs in one run
-- ✅ Fully offline, Dockerized solution
-- ✅ Fast processing even for large PDFs
-- ✅ Clean and structured JSON output
+### ✅ Step 1: Build the Docker Image
+
+```bash
+docker build --platform=linux/amd64 -t pdf-outline-extractor .
+docker build --platform=linux/amd64 -t pdfextractor:round1a .
+```
+
+### ▶️ Step 2: Run the Container
+
+#### On Linux/macOS (bash, zsh):
+
+```bash
+docker run --rm \
+  -v $(pwd)/app/input:/app/input \
+  -v $(pwd)/app/output:/app/output \
+  --network none \
+  pdfextractor:round1a
+```
+
+#### On Windows (PowerShell):
+
+docker run --rm `
+  -v ${PWD}/app/input:/app/input `
+  -v ${PWD}/app/output:/app/output `
+  --network none `
+  pdf-outline-extractor
+
+
+> ℹ️ The container runs **completely offline**. Ensure your `input/` folder contains PDFs before running.
 
 ---
 
-## 👩‍💻 Author
+## 📦 Dependencies
 
-Salusha — Participant, Adobe Hackathon 2025  
-GitHub: [https://github.com/salusha](https://github.com/salusha)
+Declared in `requirements.txt`:
 
-Snehal Taori — Participant, Adobe Hackathon 2025  
-GitHub: [https://github.com/snehaltaori](https://github.com/snehaltaori)
+```
+PyMuPDF==1.23.7
+pandas==1.5.3
+numpy==1.24.4
+scikit-learn==1.2.2
+```
 
-Deepanshi Verma — Participant, Adobe Hackathon 2025  
-GitHub: [https://github.com/DeepanshiiVerma](https://github.com/DeepanshiiVerma)
+Install locally using:
 
+```bash
+pip install -r requirements.txt
+```
 
 ---
+
+## 🧪 Testing Your Setup
+
+After building the image and adding PDFs to `app/input`, run the container. Check `app/output/` for the extracted `.json` files.
+
+If no output is generated, verify:
+- The PDF files are valid
+- You’re mounting the correct folder
+- Logs are printing any issues (check console)
+
+---
+
+## 📚 Example Collections
+
+Place your test PDFs in:
+
+```
+app/input/
+├── ai_research.pdf
+├── machine_learning_basics.pdf
+```
+
+After running the container, you’ll get:
+
+```
+app/output/
+├── ai_research.json
+├── machine_learning_basics.json
+```
+
+Each `.json` file contains structured heading outlines.
+
+---
+
+## 👩‍💻 Authors
+
+- **Salusha** — [GitHub](https://github.com/salusha)  
+- **Snehal Taori** — [GitHub](https://github.com/snehaltaori)  
+- **Deepanshi Verma** — [GitHub](https://github.com/DeepanshiiVerma)
+
+---
+
+> 📌 Built for Adobe Hackathon 2025 — Round 1A
