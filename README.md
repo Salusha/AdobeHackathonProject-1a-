@@ -132,8 +132,3 @@ GitHub: [https://github.com/DeepanshiiVerma](https://github.com/DeepanshiiVerma)
 
 
 ---
-
-## 📝 Notes
-
-- This tool is designed to run **offline** and does not require internet access.
-- For Round 2, this JSON output can be plugged into a frontend using Adobe PDF Embed API.
